@@ -1,14 +1,13 @@
 package examenGimnasiosJPA.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import examenGimnasiosJPA.Entidad;
@@ -21,10 +20,9 @@ public class Gimnasio extends Entidad implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO) //Cómo tiene que crear los nuevos registros
 	private int id;
 	private String descripcion;
-
-	@ManyToOne(fetch=FetchType.LAZY)	
-	@JoinColumn(name="idgimnasio")
-	private Gimnasio gimnasio;
+	
+	@OneToMany(mappedBy="gimnasio")
+	private List<Asistente> asistentes;
 	
 	public Gimnasio() {
 		super();
@@ -46,12 +44,12 @@ public class Gimnasio extends Entidad implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public Gimnasio getGimnasio() {
-		return gimnasio;
+	public List<Asistente> getAsistentes() {
+		return asistentes;
 	}
 
-	public void setGimnasio(Gimnasio gimnasio) {
-		this.gimnasio = gimnasio;
+	public void setAsistentes(List<Asistente> asistentes) {
+		this.asistentes = asistentes;
 	}
 
 }

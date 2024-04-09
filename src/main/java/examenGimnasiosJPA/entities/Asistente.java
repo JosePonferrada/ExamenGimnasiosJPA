@@ -2,13 +2,14 @@ package examenGimnasiosJPA.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import examenGimnasiosJPA.Entidad;
@@ -21,14 +22,17 @@ public class Asistente extends Entidad implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO) //Cómo tiene que crear los nuevos registros
 	private int id;
-	@OneToMany(mappedBy="gimnasio")
-	private List<Gimnasio> gimnasios;
+
+	@ManyToOne(fetch=FetchType.LAZY)	
+	@JoinColumn(name="idgimnasio")
+	private Gimnasio gimnasio;
 	
 	private String dniNiePasaporte;
 	
-	@OneToMany(mappedBy="gimnasio")
-	private List<Localidad> localidades;
-	
+	@ManyToOne(fetch=FetchType.LAZY)	
+	@JoinColumn(name="idlocalidad")
+	private Localidad localidadObj;
+
 	private Boolean activo;
 	private String nombre;
 	private String apellidos;
@@ -47,14 +51,6 @@ public class Asistente extends Entidad implements Serializable {
 		this.id = id;
 	}
 
-	public List<Gimnasio> getGimnasios() {
-		return gimnasios;
-	}
-
-	public void setGimnasios(List<Gimnasio> gimnasios) {
-		this.gimnasios = gimnasios;
-	}
-
 	public String getDniNiePasaporte() {
 		return dniNiePasaporte;
 	}
@@ -63,13 +59,6 @@ public class Asistente extends Entidad implements Serializable {
 		this.dniNiePasaporte = dniNiePasaporte;
 	}
 
-	public List<Localidad> getLocalidades() {
-		return localidades;
-	}
-
-	public void setLocalidades(List<Localidad> localidades) {
-		this.localidades = localidades;
-	}
 
 	public Boolean getActivo() {
 		return activo;
@@ -109,6 +98,22 @@ public class Asistente extends Entidad implements Serializable {
 
 	public void setCuotaMensual(Float cuotaMensual) {
 		this.cuotaMensual = cuotaMensual;
+	}
+
+	public Localidad getLocalidadObj() {
+		return localidadObj;
+	}
+
+	public void setLocalidadObj(Localidad localidadObj) {
+		this.localidadObj = localidadObj;
+	}
+
+	public Gimnasio getGimnasio() {
+		return gimnasio;
+	}
+
+	public void setGimnasio(Gimnasio gimnasio) {
+		this.gimnasio = gimnasio;
 	}
 	
 

@@ -10,7 +10,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 
-public class DriverGeneral {
+public class ControladorGeneral {
 
 	private static EntityManagerFactory entityManagerFactory;
 
@@ -21,7 +21,7 @@ public class DriverGeneral {
 	 * 
 	 * @param nombreEntidad
 	 */
-	public DriverGeneral(Class entidadControlada, String unidadPersistencia) {
+	public ControladorGeneral(Class entidadControlada, String unidadPersistencia) {
 		if (entityManagerFactory == null) {
 			entityManagerFactory = Persistence.createEntityManagerFactory(unidadPersistencia);
 		}

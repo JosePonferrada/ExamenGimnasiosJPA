@@ -1,14 +1,13 @@
 package examenGimnasiosJPA.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import examenGimnasiosJPA.Entidad;
@@ -23,9 +22,10 @@ public class Localidad extends Entidad implements Serializable {
 	private int id;
 	private String localidad;
 
-	@ManyToOne(fetch=FetchType.LAZY)	
-	@JoinColumn(name="idlocalidad")
-	private Localidad localidadObj;
+	
+	@OneToMany(mappedBy="localidadObj")
+	private List<Asistente> asistentes;
+	
 	
 	public Localidad() {
 		super();
@@ -47,12 +47,13 @@ public class Localidad extends Entidad implements Serializable {
 		this.localidad = localidad;
 	}
 
-	public Localidad getLocalidadObj() {
-		return localidadObj;
+	public List<Asistente> getAsistentes() {
+		return asistentes;
 	}
 
-	public void setLocalidadObj(Localidad localidadObj) {
-		this.localidadObj = localidadObj;
+	public void setAsistentes(List<Asistente> asistentes) {
+		this.asistentes = asistentes;
 	}
+
 	
 }

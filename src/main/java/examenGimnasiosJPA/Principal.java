@@ -13,6 +13,7 @@ import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
@@ -71,7 +72,7 @@ public class Principal extends JPanel {
 		jcbGimnasio = new JComboBox<Gimnasio>();
 		GridBagConstraints gbc_jcbGimnasio = new GridBagConstraints();
 		gbc_jcbGimnasio.insets = new Insets(0, 0, 5, 0);
-		gbc_jcbGimnasio.gridwidth = 3;
+		gbc_jcbGimnasio.gridwidth = 2;
 		gbc_jcbGimnasio.fill = GridBagConstraints.HORIZONTAL;
 		gbc_jcbGimnasio.gridx = 1;
 		gbc_jcbGimnasio.gridy = 1;
@@ -287,6 +288,14 @@ public class Principal extends JPanel {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
+		EntityManager em = Persistence.createEntityManagerFactory("Gimnasios")
+		.createEntityManager();
+		Localidad l = em.find(Localidad.class, 1);
+		Asistente a = em.find(Asistente.class, 1);
+		
+		System.out.println(a.getGimnasio().getDescripcion());
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
